@@ -7,12 +7,29 @@
 //
 
 import UIKit
+import Parse
 
 class PostCell: UITableViewCell {
 
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var authorLabel: UILabel!
     @IBOutlet var captionLabel: UILabel!
+    
+    var post: PFObject! {
+        didSet {            
+            let user = post["author"] as! PFUser
+            authorLabel.text = user.username
+            
+            captionLabel.text = post["caption"] as? String
+            
+            let imageFile = post["image"] as! PFFileObject
+            let urlString = imageFile.url!
+            let url = URL(string: urlString)!
+            let data = try! Data(contentsOf: url)
+
+            photoImageView.image = UIImage(data: data)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

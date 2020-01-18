@@ -42,7 +42,7 @@ class CameraVC: UIViewController {
             if success {
                 self.dismiss(animated: true, completion: nil)
             } else {
-                print("Error: \(error?.localizedDescription)")
+                print("Error: \(String(describing: error))")
                 self.performOkayAlertWith(title: "Error", message: error!.localizedDescription)
             }
         }
@@ -61,16 +61,6 @@ class CameraVC: UIViewController {
         
         present(picker, animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -80,7 +70,7 @@ extension CameraVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         guard let image = info[.editedImage] as? UIImage else { return }
         
         let size = CGSize(width: 300, height: 300)
-        let scaledImage = image.af_imageScaled(to: size)
+        let scaledImage = image.af_imageAspectScaled(toFit: size)
         
         imageView.image = scaledImage
         

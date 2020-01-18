@@ -11,11 +11,12 @@ import UIKit
 extension UIViewController {
     
     func performOkayAlertWith(title: String, message: String = "") {
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okBtn = UIAlertAction(title: "Ok", style: .cancel)
         
         alert.addAction(okBtn)
-        self.present(alert, animated: true)
+        DispatchQueue.main.async { self.present(alert, animated: true) }
     }
 
 }

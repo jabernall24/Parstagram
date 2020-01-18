@@ -29,7 +29,7 @@ class SignInVC: UIViewController {
             if user != nil {
                 self.performSegue(withIdentifier: "logInSegue", sender: nil)
             } else {
-                print("Error: \(error?.localizedDescription)")
+                print("Error: \(String(describing: error))")
                 self.performOkayAlertWith(title: "Error", message: error!.localizedDescription)
             }
         }
@@ -53,19 +53,9 @@ class SignInVC: UIViewController {
             if success {
                 self.performSegue(withIdentifier: "logInSegue", sender: nil)
             } else {
-                print("Error: \(error?.localizedDescription)")
+                print("Error: \(String(describing: error))")
                 self.performOkayAlertWith(title: "Internal Server Error", message: "Please try again later")
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
